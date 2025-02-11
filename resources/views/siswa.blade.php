@@ -27,9 +27,9 @@
                 <form action="{{Route('siswa.delete', $sw['id'])}}" method="post">
                     @method('DELETE')
                     @csrf
-                    <button class="btn btn-danger">Hapus</button>
+                    <button class="btn btn-danger" type="submit">Hapus</button>
+                    <a class="btn btn-warning"href="{{Route('siswa.edit',$sw['id'])}}">Edit</a>
                 </form>
-                <a class="btn-btn warning"href="siswa.edit">
 
                 </a>
             </td>
