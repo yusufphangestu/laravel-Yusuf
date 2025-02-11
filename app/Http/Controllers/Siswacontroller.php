@@ -68,4 +68,6 @@ class Siswacontroller extends Controller
         return redirect()->route('siswa');
     }
 
+    public function
+
 }
