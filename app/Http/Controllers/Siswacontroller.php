@@ -43,6 +43,16 @@ class Siswacontroller extends Controller
 
     public function store (Request$request)
     {
+
+        $validated=$request->validate([
+            'nama'=>'required',
+            'alamat'=>'required',
+            'jenis_kelamin'=>'required'
+        ],[
+            'nama.required'=>"kolom iki kudu diisi asuu",
+            'alamat.required'=>"kolom iki kudu diisi asuu",
+            'jenis_kelamin.required'=>"kolom iki kudu diisi asuu"
+        ]);
         // untuk menyimpan data siswa
         // data yang disimpan adalah nama, alamat, dan jenis kelamin
         $data=Student::create([
@@ -58,10 +68,10 @@ class Siswacontroller extends Controller
 
     public function destroy($id)
     {
-        // menemukan siswa berdasarkan id
+        // menemukan data siswa berdasarkan id
         $data=Student::find($id);
 
-        // menghapus siswa berdasarkan id yang ditemukan
+        // menghapus data siswa berdasarkan id yang ditemukan
         $data->delete();
 
         // mengarahkan kembali ke halaman siswa setelah berhasil menghapus data
@@ -70,8 +80,28 @@ class Siswacontroller extends Controller
 
     public function edit($id)
     {
+        // menemukan data siswa berdasarkan id
         $data=Student::findOrFail($id);
+
+        // mengarahkan kembali ke halaman siswa setelah berhasil mengirim data
         return view('edit-siswa', compact('data'));
     }
+
+    public function update(Request$request,$id)
+    {
+        // menemukan data siswa berdasarkan id
+        $data=Student::findOrFail($id);
+
+        // mengupdate data siswa berdasarkan id yng ditemukan
+        $data->update([
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'jenis_kelamin'=>$request->jenis_kelamin
+        ]);
+
+        // mengarahkan kembali ke halaman siswa setelah berhasil mengupdate data
+        return redirect()->route('siswa');
+    }
+
 
 }
